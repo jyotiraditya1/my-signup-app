@@ -1,0 +1,30 @@
+{% include 'header.html' %}
+<br><br><br><br><br><br><br><br>
+{% block content %}
+{% if user.is_authenticated %}
+<body onload="myFunction()">
+
+<script>
+function myFunction() {
+    alert("Your are logged in already!!");
+    window.location = "http://127.0.0.1:8000/";
+}
+</script>
+</body>
+
+{% else %}
+  <div class="container">
+    <h3>Sign up From Here</h3>
+    <form method="post" novalidate>
+      {% csrf_token %}
+      {% include 'includes/form.html' %}
+      <button type="submit" class="btn btn-primary">Create an account</button>
+    </form>
+  
+  <div class="card-footer text-muted text-center">
+            Already have an account? <a href="login">Log in</a>
+          </div>
+          </div>
+          {% endif %}
+           {% include "footer.html" %}
+{% endblock %}

@@ -1,0 +1,42 @@
+
+{% include 'header.html' %}
+<br><br><br><br><br><br><br><br>
+{% block content %}
+
+{% if user.is_authenticated %}
+<body onload="myFunction()">
+
+<script>
+function myFunction() {
+    alert("Your are logged in already!!");
+    window.location = "http://127.0.0.1:8000/";
+}
+</script>
+</body>
+
+{% else %}
+  <div class="container">
+            <h3>Log in</h3>
+            <form method="post" novalidate class="login-form" autocomplete="off" >
+              {% csrf_token %}
+              {% include 'includes/form.html' %}
+              <button type="submit" class="btn btn-primary btn-block">Log in</button>
+            </form>
+          </div>
+          <div class="card-footer text-muted text-center">
+            New to Site? <a href="{% url 'signup' %}">Sign up</a>
+          </div>
+        </div>
+        <div class="text-center py-2">
+          <small>
+            <a href="{% url 'password_reset' %}" class="text-muted">Forgot your password?</a>
+          </small>
+        </div>
+      </div>
+
+{% endif %}
+     {% include "footer.html" %}
+  
+
+  {% endblock %}
+ 
